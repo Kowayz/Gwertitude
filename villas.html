@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWERTITUDE | Palais & Villas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CORE STYLES (IDENTIQUE INDEX) --- */
+        :root {
+            --bg-body: #080808; 
+            --bg-card: #121212;
+            --text-main: #FFFFFF; 
+            --text-sub: #A0A0A0; 
+            --accent: #D4AF37;
+            --border: rgba(255, 255, 255, 0.08); 
+            --glass: rgba(20, 20, 20, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; transition: 0.3s; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-body); color: var(--text-main); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; } 
+        button { cursor: pointer; border: none; font-family: 'Outfit', sans-serif; }
+
+        /* NAV */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--glass); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.4rem; letter-spacing: 1px; color: var(--text-main); }
+        .back-btn { font-size: 0.9rem; text-transform: uppercase; color: var(--text-sub); display: flex; align-items: center; gap: 10px; }
+        .back-btn:hover { color: var(--accent); gap: 15px; }
+
+        .nav-icons { display: flex; gap: 15px; }
+        .icon-btn { position: relative; width: 45px; height: 45px; background: var(--bg-card); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 1px solid var(--border); color: var(--text-main); }
+        .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .cart-count { position: absolute; top: -2px; right: -2px; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+
+        /* HERO */
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.4); opacity: 0; transition: 1s ease; }
+        .hero-bg.loaded { opacity: 1; }
+        h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; margin-bottom: 10px; }
+        .subtitle { color: var(--text-sub); font-size: 1rem; max-width: 600px; }
+        
+        .hero-stats { display: flex; gap: 40px; margin-top: 30px; }
+        .stat-item { text-align: center; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--accent); display: block; font-family: 'Cinzel', serif; }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-sub); }
+
+        /* GRILLE */
+        .container { max-width: 1400px; margin: 0 auto; padding: 80px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+        
+        .card { background: var(--bg-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .img-wrap { height: 300px; overflow: hidden; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .card:hover .img-wrap img { transform: scale(1.05); }
+
+        .specs-row { display: flex; border-bottom: 1px solid var(--border); }
+        .spec { flex: 1; text-align: center; padding: 10px; border-right: 1px solid var(--border); font-size: 0.8rem; color: var(--text-sub); }
+        .spec:last-child { border-right: none; }
+        .spec b { display: block; color: var(--text-main); font-size: 0.9rem; }
+
+        .card-body { padding: 25px; }
+        .c-title { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 5px; }
+        .c-price { font-weight: 600; font-size: 1.1rem; color: var(--accent); display: block; margin-bottom: 15px;}
+        .c-desc { color: var(--text-sub); font-size: 0.85rem; line-height: 1.5; margin-bottom: 20px; }
+
+        .add-btn { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
+        .add-btn:hover { background: var(--text-main); color: #000; }
+
+        /* PANIER DRAWER */
+        .cart-drawer { position: fixed; top: 0; right: -450px; width: 450px; height: 100%; background: var(--bg-card); z-index: 2000; padding: 30px; display: flex; flex-direction: column; transition: 0.4s ease; border-left: 1px solid var(--border); box-shadow: -10px 0 50px rgba(0,0,0,0.8); }
+        .cart-open .cart-drawer { right: 0; }
+        
+        .backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.4s; }
+        .cart-open .backdrop { opacity: 1; pointer-events: all; }
+
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .cart-title { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 1px; }
+        .close-cart { font-size: 1.2rem; cursor: pointer; color: var(--text-sub); }
+        .close-cart:hover { color: #fff; }
+
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
+        .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); }
+        .item-info h4 { font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
+        .item-info span { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+
+        .cart-footer { padding-top: 20px; border-top: 1px solid var(--border); }
+        .total-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--text-main); color: var(--bg-body); border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .checkout-btn:hover { background: var(--accent); color: #fff; }
+
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .grid { grid-template-columns: 1fr; } .cart-drawer { width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+        <div class="logo">Gwertitude.</div>
+        <div class="nav-icons">
+            <button class="icon-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <header>
+        <img src="" class="hero-bg" id="hero-bg">
+        <h1 id="page-title">...</h1>
+        <p class="subtitle" id="page-subtitle">...</p>
+        <div class="hero-stats" id="hero-stats"></div>
+    </header>
+
+    <div class="container">
+        <div class="grid" id="product-grid"></div>
+    </div>
+
+    <div class="backdrop" onclick="toggleCart()"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <span class="cart-title">DOSSIER</span>
+            <i class="fas fa-times close-cart" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-items" id="cart-content">
+            <p style="text-align:center; color:var(--text-sub); margin-top:50px;">Dossier vide.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total Estimé</span>
+                <span id="cart-total">0 €</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Demande envoyée.')">CONFIRMER</button>
+        </div>
+    </div>
+
+    <script>
+        // --- LOGIQUE SYSTEME ---
+        function toggleCart(){document.body.classList.toggle('cart-open')}
+
+        // --- DONNÉES VILLAS ---
+        const DATA = {
+            title: "Palais Modernes",
+            subtitle: "Chefs-d'œuvre architecturaux. Codes postaux convoités.",
+            hero: "Images/Villas/bannière G.png",
+            stats: [{v:"2000+",l:"M²"}, {v:"AAA",l:"Location"}, {v:"24/7",l:"Sécurité"}],
+            items: [
+                { name: "Villa Les Cèdres", price: 410000000, img: "Images/Villas/Villa Les Cèdres.jpg", desc: "Saint-Jean-Cap-Ferrat. Histoire royale.", s1:"18k ft²", s2:"France" },
+                { name: "The One", price: 141000000, img: "Images/Villas/The One.webp", desc: "Bel-Air. Vue 360° sur LA.", s1:"105k ft²", s2:"USA" },
+                { name: "Penthouse Odéon", price: 335000000, img: "Images/Villas/Penthouse Odéon.webp", desc: "Monaco. Toboggan privé sur le toit.", s1:"3500 m²", s2:"Monaco" },
+                { name: "Marble Palace", price: 204000000, img: "Images/Villas/Marble Palace.jpg", desc: "Dubai. Inspiré de Versailles.", s1:"6000 m²", s2:"Dubai" }
+
+
+            ]
+        };
+
+        // --- MOTEUR RENDU ---
+        document.getElementById('page-title').innerHTML = DATA.title;
+        document.getElementById('page-subtitle').innerText = DATA.subtitle;
+        const bg = document.getElementById('hero-bg'); bg.src = DATA.hero; bg.onload = () => bg.classList.add('loaded');
+
+        const statsBox = document.getElementById('hero-stats');
+        DATA.stats.forEach(s => statsBox.innerHTML += `<div class="stat-item"><span class="stat-val">${s.v}</span><span class="stat-label">${s.l}</span></div>`);
+
+        const grid = document.getElementById('product-grid');
+        DATA.items.forEach(p => {
+            let displayPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(p.price);
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="img-wrap"><img src="${p.img}"></div>
+                    <div class="specs-row">
+                        <div class="spec"><b>${p.s1.split(' ')[0]}</b>${p.s1.split(' ')[1] || ''}</div>
+                        <div class="spec"><b>${p.s2.split(' ')[0]}</b>${p.s2.split(' ')[1] || ''}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="c-title">${p.name}</h3>
+                        <span class="c-price">${displayPrice}</span>
+                        <p class="c-desc">${p.desc}</p>
+                        <button class="add-btn" onclick="addToCart('${p.name}', ${p.price}, '${p.img}')">Acquérir</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        // --- GESTION PANIER INFAILLIBLE ---
+        let cartTotal = 0; 
+        let cartCount = 0;
+
+        function addToCart(name, price, img) {
+            const content = document.getElementById('cart-content');
+            
+            // Premier ajout : on vide le message "vide"
+            if(cartCount === 0) content.innerHTML = '';
+
+            const priceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(price);
+
+            // Ajout HTML
+            content.innerHTML += `
+                <div class="cart-item">
+                    <img src="${img}">
+                    <div class="item-info">
+                        <h4 style="font-size:0.9rem; margin-bottom:5px; font-weight:600;">${name}</h4>
+                        <span style="color:var(--accent); font-weight:700; font-size:0.9rem;">${priceFormatted}</span>
+                    </div>
+                </div>
+            `;
+
+            // Calculs (Simple addition d'entiers)
+            cartTotal += price;
+            cartCount++;
+
+            // Mise à jour Affichage
+            document.getElementById('cart-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(cartTotal);
+            document.querySelector('.cart-count').innerText = cartCount;
+
+            // Ouverture automatique
+            if(!document.body.classList.contains('cart-open')) toggleCart();
+        }
+    </script>
+</body>
+</html>

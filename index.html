@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWERTITUDE | Beyond Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. CONFIGURATION --- */
+        :root {
+            --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            
+            /* THEME: PRESTIGE (Defaut) */
+            --bg-body: #080808;
+            --bg-image: var(--noise);
+            --bg-card: #121212;
+            --text-main: #FFFFFF;
+            --text-sub: #A0A0A0;
+            --accent: #D4AF37;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(20, 20, 20, 0.85);
+            --shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-body);
+            background-image: var(--bg-image);
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: 'Outfit', sans-serif; }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--glass); backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .logo { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 1px; color: var(--text-main); }
+        .nav-actions { display: flex; align-items: center; gap: 15px; position: relative; }
+
+        .icon-btn {
+            position: relative; font-size: 1.1rem; width: 50px; height: 50px;
+            background: var(--bg-card); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid var(--border); color: var(--text-main);
+            transition: 0.3s;
+        }
+        .icon-btn:hover { transform: scale(1.1); border-color: var(--accent); color: var(--accent); }
+        .cart-count {
+            position: absolute; top: -2px; right: -2px; background: var(--accent); color: #fff;
+            font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* --- HERO --- */
+        header { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .pill-tag {
+            background: var(--bg-card); padding: 8px 20px; border-radius: 50px;
+            font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+            border: 1px solid var(--border); margin-bottom: 30px; color: var(--accent); font-weight: 600;
+        }
+        h1 {
+            font-family: 'Cinzel', serif; font-size: 5rem; line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-sub) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        p.subtitle { color: var(--text-sub); font-size: 1.2rem; max-width: 600px; }
+
+        /* --- SECTION TITLES --- */
+        .section-header { text-align: center; margin-bottom: 60px; margin-top: 100px; }
+        .section-title { font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; }
+        .section-desc { color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* --- TOP 3 GRID (TRINITY) --- */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+
+        .card {
+            background: var(--bg-card); border-radius: 24px; overflow: hidden;
+            border: 1px solid var(--border); position: relative; transition: 0.4s;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: var(--accent); }
+        .img-wrap { height: 400px; overflow: hidden; position: relative; background: #000; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; opacity: 0.95; }
+        .card:hover .img-wrap img { transform: scale(1.05); opacity: 1; }
+        
+        /* Badges "Rare" */
+        .badge {
+            position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            color: #fff; padding: 5px 15px; border-radius: 30px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card-body { padding: 30px; }
+        .c-cat { font-size: 0.7rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 10px;}
+        .c-title { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 10px; }
+        .c-price { font-weight: 600; font-size: 1.2rem; display: block; margin-bottom: 20px; color: var(--text-main); }
+        
+        .add-btn {
+            width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border);
+            color: var(--text-main); border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s;
+        }
+        .add-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* --- THE 4 WORLDS (Gateways) --- */
+        .gateway-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 150px;
+        }
+
+        .gateway-card {
+            height: 500px; position: relative; border-radius: 24px; overflow: hidden; cursor: pointer;
+            border: 1px solid var(--border);
+        }
+        .gateway-img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease;
+            filter: brightness(0.7);
+        }
+        .gateway-card:hover .gateway-img { transform: scale(1.05); filter: brightness(0.9); }
+        
+        .gateway-content {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #fff; /* Toujours blanc car sur image sombre */
+        }
+        .gateway-title { font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 10px; }
+        .gateway-desc { font-size: 1rem; opacity: 0.8; font-weight: 300; letter-spacing: 1px; }
+        
+        .gateway-arrow {
+            position: absolute; top: 30px; right: 30px; width: 60px; height: 60px;
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
+            display: flex; justify-content: center; align-items: center; color: #fff;
+            transform: rotate(-45deg); transition: 0.4s; backdrop-filter: blur(5px);
+        }
+        .gateway-card:hover .gateway-arrow { transform: rotate(0deg); background: #fff; color: #000; }
+
+        /* --- INVENTORY (Hidden by default, shown via JS) --- */
+        #inventory-section { display: none; padding-top: 50px; animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(30px);} to { opacity:1; transform:translateY(0);} }
+
+        /* --- CART --- */
+        .cart-drawer {
+            position: fixed; top: 0; right: -500px; width: 450px; height: 100%;
+            background: var(--bg-card); z-index: 2000; padding: 40px;
+            display: flex; flex-direction: column; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            border-left: 1px solid var(--border); box-shadow: -20px 0 60px rgba(0,0,0,0.2);
+        }
+        .cart-open .cart-drawer { right: 0; }
+        .backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+            z-index: 1500; opacity: 0; pointer-events: none; transition: 0.5s;
+        }
+        .cart-open .backdrop { opacity: 1; pointer-events: all; }
+        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .cart-item img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .grid-3, .gateway-grid { grid-template-columns: 1fr; }
+            .gateway-card { height: 350px; }
+            .cart-drawer { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Gwertitude.</div>
+        <div class="nav-actions">
+            <button class="icon-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i><span class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <header>
+        <div class="pill-tag">Automne / Hiver 2025</div>
+        <h1>L'Excès <br>Comme Standard.</h1>
+        <p class="subtitle">Nous ne vendons pas des objets. Nous vendons la souveraineté.</p>
+    </header>
+
+    <div class="container">
+        <div class="section-header">
+            <p class="section-desc">Sélection du Curator</p>
+            <h2 class="section-title">La Trinité</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="card" data-price="75000000">
+                <div class="img-wrap">
+                    <div class="badge">Choix du Mois</div>
+                    <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jet">
+                </div>
+                <div class="card-body">
+                    <span class="c-cat">Aviation</span>
+                    <h3 class="c-title">Gulfstream G800</h3>
+                    <span class="c-price">75 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Gulfstream G800', 75000000, 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                </div>
+            </div>
+
+            <div class="card" data-price="185000000">
+                <div class="img-wrap">
+                    <div class="badge">Pièce Unique</div>
+                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7dd8d36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Yacht">
+                </div>
+                <div class="card-body">
+                    <span class="c-cat">Marine</span>
+                    <h3 class="c-title">Obsidian 90m</h3>
+                    <span class="c-price">185 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Obsidian 90m', 185000000, 'https://images.unsplash.com/photo-1569263979104-865ab7dd8d36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                </div>
+            </div>
+
+            <div class="card" data-price="12000000">
+                <div class="img-wrap">
+                    <div class="badge">Rarissime</div>
+                    <img src="https://images.unsplash.com/photo-1617317376997-8748e6862c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Diamant">
+                </div>
+                <div class="card-body">
+                    <span class="c-cat">Joaillerie</span>
+                    <h3 class="c-title">Pink Star Diamond</h3>
+                    <span class="c-price">12 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Pink Star Diamond', 12000000, 'https://images.unsplash.com/photo-1617317376997-8748e6862c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-header" style="margin-top: 150px;">
+            <p class="section-desc">Entrez dans le cercle</p>
+            <h2 class="section-title">Les 4 Mondes</h2>
+        </div>
+
+        <div class="gateway-grid">
+            
+            <div class="gateway-card" onclick="window.location.href='aviation.html'">
+                <img src="https://images.unsplash.com/photo-1559087867-ce4c91325525?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Aviation">
+                <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="gateway-content">
+                    <h3 class="gateway-title">Cieux Privés</h3>
+                    <p class="gateway-desc">Dominez l'horizon. Jets long-courriers et hélicoptères furtifs.</p>
+                </div>
+            </div>
+
+            <div class="gateway-card" onclick="window.location.href='automobiles.html'">
+                <img src="https://images.unsplash.com/photo-1621689725656-e918b9595568?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Auto">
+                <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="gateway-content">
+                    <h3 class="gateway-title">Mécanique d'Art</h3>
+                    <p class="gateway-desc">Hypercars en édition limitée. Le summum de l'ingénierie.</p>
+                </div>
+            </div>
+
+            <div class="gateway-card" onclick="window.location.href='iles.html'">
+                <img src="https://images.unsplash.com/photo-1599645228182-3c224a13d789?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Ile">
+                <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="gateway-content">
+                    <h3 class="gateway-title">Royaumes Isolés</h3>
+                    <p class="gateway-desc">Îles privées. Votre propre pays, vos propres règles.</p>
+                </div>
+            </div>
+
+            <div class="gateway-card" onclick="window.location.href='villas.html'">
+                <img src="https://images.unsplash.com/photo-1605218427306-6354db696fc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Villa">
+                <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="gateway-content">
+                    <h3 class="gateway-title">Architectures</h3>
+                    <p class="gateway-desc">Villas historiques et penthouses sur le toit du monde.</p>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+    </div>
+
+    <footer style="background: var(--bg-card); padding: 80px 5%; border-top: 1px solid var(--border);">
+        <div style="max-width: 1400px; margin: 0 auto; text-align:center;">
+            <h4 style="font-family:'Cinzel',serif; font-size:2rem; margin-bottom:20px;">GWERTITUDE.</h4>
+            <p style="color:var(--text-sub);">L'impossible n'est qu'une option.</p>
+            <div style="margin-top:40px; color:var(--text-sub); font-size:0.8rem;">&copy; 2025 GWERTITUDE.</div>
+        </div>
+    </footer>
+
+    <div class="backdrop" onclick="toggleCart()"></div>
+    <div class="cart-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+            <h2 style="font-family:'Cinzel', serif;">Dossier</h2>
+            <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem; color:var(--text-sub);"></i>
+        </div>
+        <div id="cart-content" style="flex:1; overflow-y:auto;">
+            <p style="text-align:center; color:var(--text-sub); margin-top:50px;">Coffre vide.</p>
+        </div>
+        <div style="padding-top:20px; border-top:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1.2rem; font-weight:600;">
+                <span>Total Estimé</span>
+                <span id="cart-total">0 €</span>
+            </div>
+            <button class="add-btn" style="background:var(--text-main); color:var(--bg-body);" onclick="alert('Transaction initiée.')">Confirmer</button>
+        </div>
+    </div>
+
+    <script>
+        // LOGIQUE PANIER
+        let total = 0; let count = 0;
+        function toggleCart() { document.body.classList.toggle('cart-open'); }
+        
+        function addToCart(btn, title, price, img) {
+            const content = document.getElementById('cart-content');
+            if(count === 0) content.innerHTML = '';
+            
+            const item = document.createElement('div');
+            item.className = 'cart-item';
+            item.innerHTML = `<img src="${img}"><div><h4 style="font-size:1rem;">${title}</h4><span style="color:var(--accent); font-weight:600;">${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(price)}</span></div>`;
+            content.appendChild(item);
+            
+            total += price; count++;
+            document.getElementById('cart-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(total);
+            document.querySelector('.cart-count').innerText = count;
+            toggleCart();
+        }
+    </script>
+</body>
+</html>
