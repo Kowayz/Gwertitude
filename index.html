@@ -15,6 +15,7 @@
         /* --- 1. CONFIGURATION --- */
         :root {
             --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            --pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='luxuryPattern' patternUnits='userSpaceOnUse' width='30' height='30'%3E%3Ccircle cx='15' cy='15' r='0.8' fill='rgba(212,175,55,0.06)' /%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23luxuryPattern)' /%3E%3C/svg%3E");
             
             /* THEME: PRESTIGE (Defaut) */
             --bg-body: #080808;
@@ -33,12 +34,13 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-body);
-            background-image: var(--bg-image);
+            background-image: linear-gradient(45deg, rgba(212,175,55,0.008) 0%, transparent 50%, rgba(212,175,55,0.008) 100%), var(--pattern), var(--bg-image);
             background-attachment: fixed;
             color: var(--text-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            box-shadow: inset 0 0 200px rgba(212,175,55,0.02);
         }
 
         a { text-decoration: none; color: inherit; }
@@ -51,7 +53,7 @@
             background: var(--glass); backdrop-filter: blur(20px);
             z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 1px; color: var(--text-main); }
+        .logo { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 1px; color: var(--text-main); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
         .nav-actions { display: flex; align-items: center; gap: 15px; position: relative; }
 
         .icon-btn {
@@ -59,9 +61,12 @@
             background: var(--bg-card); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             border: 1px solid var(--border); color: var(--text-main);
-            transition: 0.3s;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .icon-btn:hover { transform: scale(1.1); border-color: var(--accent); color: var(--accent); }
+        .icon-btn:hover { 
+            transform: scale(1.1); border-color: var(--accent); color: var(--accent); 
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+        }
         .cart-count {
             position: absolute; top: -2px; right: -2px; background: var(--accent); color: #fff;
             font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%;
@@ -77,14 +82,19 @@
         }
         h1 {
             font-family: 'Cinzel', serif; font-size: 5rem; line-height: 1.1; margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-sub) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background: linear-gradient(135deg, var(--text-main) 20%, var(--accent) 50%, var(--text-sub) 80%);
+            background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
         p.subtitle { color: var(--text-sub); font-size: 1.2rem; max-width: 600px; }
 
         /* --- SECTION TITLES --- */
         .section-header { text-align: center; margin-bottom: 60px; margin-top: 100px; }
-        .section-title { font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; }
+        .section-title { font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; position: relative; }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
         .section-desc { color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
 
         /* --- TOP 3 GRID (TRINITY) --- */
@@ -93,9 +103,14 @@
 
         .card {
             background: var(--bg-card); border-radius: 24px; overflow: hidden;
-            border: 1px solid var(--border); position: relative; transition: 0.4s;
+            border: 1px solid var(--border); position: relative; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1), 0 0 40px rgba(212, 175, 55, 0.05);
         }
-        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: var(--accent); }
+        .card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 60px rgba(212, 175, 55, 0.15);
+            border-color: var(--accent);
+        }
         .img-wrap { height: 400px; overflow: hidden; position: relative; background: #000; }
         .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; opacity: 0.95; }
         .card:hover .img-wrap img { transform: scale(1.05); opacity: 1; }
@@ -113,9 +128,20 @@
         
         .add-btn {
             width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border);
-            color: var(--text-main); border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s;
+            color: var(--text-main); border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
         }
-        .add-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .add-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transition: left 0.5s ease;
+        }
+        .add-btn:hover { 
+            background: var(--accent); color: #fff; border-color: var(--accent); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+        .add-btn:hover::before { left: 100%; }
 
         /* --- THE 4 WORLDS (Gateways) --- */
         .gateway-grid {
@@ -127,7 +153,13 @@
 
         .gateway-card {
             height: 500px; position: relative; border-radius: 24px; overflow: hidden; cursor: pointer;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border); transition: all 0.5s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2), 0 0 50px rgba(212, 175, 55, 0.08);
+        }
+        .gateway-card:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4), 0 0 80px rgba(212, 175, 55, 0.2);
+            border-color: var(--accent);
         }
         .gateway-img {
             width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease;
@@ -193,8 +225,26 @@
 
     <header>
         <div class="pill-tag">Automne / Hiver 2025</div>
+        <div style="margin-bottom: 30px;">
+            <p style="color: var(--accent); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 10px;">Bienvenue dans l'élite</p>
+            <div style="width: 60px; height: 2px; background: var(--accent); margin: 0 auto;"></div>
+        </div>
         <h1>L'Excès <br>Comme Standard.</h1>
         <p class="subtitle">Nous ne vendons pas des objets. Nous vendons la souveraineté.</p>
+        <div style="margin-top: 40px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+            <div style="text-align: center; background: rgba(212, 175, 55, 0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent); font-family: 'Cinzel', serif;">500+</div>
+                <div style="color: var(--text-sub); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Clients Exclusifs</div>
+            </div>
+            <div style="text-align: center; background: rgba(212, 175, 55, 0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent); font-family: 'Cinzel', serif;">24/7</div>
+                <div style="color: var(--text-sub); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Service Conciergerie</div>
+            </div>
+            <div style="text-align: center; background: rgba(212, 175, 55, 0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--accent); font-family: 'Cinzel', serif;">∞</div>
+                <div style="color: var(--text-sub); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Possibilités</div>
+            </div>
+        </div>
     </header>
 
     <div class="container">
@@ -204,42 +254,42 @@
         </div>
 
         <div class="grid-3">
-            <div class="card" data-price="75000000">
+            <div class="card" data-price="1000000000">
                 <div class="img-wrap">
-                    <div class="badge">Choix du Mois</div>
-                    <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jet">
+                    <div class="badge">Mission Unique</div>
+                    <img src="Images/Image Trinité/Voyage Lune.png" alt="Space">
                 </div>
                 <div class="card-body">
-                    <span class="c-cat">Aviation</span>
-                    <h3 class="c-title">Gulfstream G800</h3>
-                    <span class="c-price">75 000 000 €</span>
-                    <button class="add-btn" onclick="addToCart(this, 'Gulfstream G800', 75000000, 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                    <span class="c-cat">Spatial</span>
+                    <h3 class="c-title">Voyage Privé Lune</h3>
+                    <span class="c-price">1 000 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Voyage Privé Lune', 1000000000, 'Images/Image Trinité/Voyage Lune.png')">Acquérir</button>
                 </div>
             </div>
 
-            <div class="card" data-price="185000000">
+            <div class="card" data-price="750000000">
                 <div class="img-wrap">
-                    <div class="badge">Pièce Unique</div>
-                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7dd8d36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Yacht">
+                    <div class="badge">Arme de Destruction</div>
+                    <img src="Images/Image Trinité/Sous marin.jpg" alt="Submarine">
                 </div>
                 <div class="card-body">
-                    <span class="c-cat">Marine</span>
-                    <h3 class="c-title">Obsidian 90m</h3>
-                    <span class="c-price">185 000 000 €</span>
-                    <button class="add-btn" onclick="addToCart(this, 'Obsidian 90m', 185000000, 'https://images.unsplash.com/photo-1569263979104-865ab7dd8d36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                    <span class="c-cat">Sous-Marin</span>
+                    <h3 class="c-title">Sous-Marin Nucléaire</h3>
+                    <span class="c-price">750 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Sous-Marin Nucléaire', 750000000, 'Images/Image Trinité/Sous marin.jpg')">Acquérir</button>
                 </div>
             </div>
 
-            <div class="card" data-price="12000000">
+            <div class="card" data-price="500000000">
                 <div class="img-wrap">
-                    <div class="badge">Rarissime</div>
-                    <img src="https://images.unsplash.com/photo-1617317376997-8748e6862c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Diamant">
+                    <div class="badge">Carnaval Inclus</div>
+                    <img src="Images/Image Trinité/Club foot.png" alt="Football Brazil">
                 </div>
                 <div class="card-body">
-                    <span class="c-cat">Joaillerie</span>
-                    <h3 class="c-title">Pink Star Diamond</h3>
-                    <span class="c-price">12 000 000 €</span>
-                    <button class="add-btn" onclick="addToCart(this, 'Pink Star Diamond', 12000000, 'https://images.unsplash.com/photo-1617317376997-8748e6862c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">Acquérir</button>
+                    <span class="c-cat">Sport International</span>
+                    <h3 class="c-title">Club de Football Brésilien</h3>
+                    <span class="c-price">500 000 000 €</span>
+                    <button class="add-btn" onclick="addToCart(this, 'Club de Football Brésilien', 500000000, 'Images/Image Trinité/Club foot.png')">Acquérir</button>
                 </div>
             </div>
         </div>
@@ -254,7 +304,7 @@
         <div class="gateway-grid">
             
             <div class="gateway-card" onclick="window.location.href='aviation.html'">
-                <img src="https://images.unsplash.com/photo-1559087867-ce4c91325525?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Aviation">
+                <img src="Images/Images catégories/Background aviation.png" class="gateway-img" alt="Aviation">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
                     <h3 class="gateway-title">Cieux Privés</h3>
@@ -263,7 +313,7 @@
             </div>
 
             <div class="gateway-card" onclick="window.location.href='automobiles.html'">
-                <img src="https://images.unsplash.com/photo-1621689725656-e918b9595568?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Auto">
+                <img src="Images/Images catégories/Background automobiles.png" class="gateway-img" alt="Auto">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
                     <h3 class="gateway-title">Mécanique d'Art</h3>
@@ -271,17 +321,17 @@
                 </div>
             </div>
 
-            <div class="gateway-card" onclick="window.location.href='iles.html'">
-                <img src="https://images.unsplash.com/photo-1599645228182-3c224a13d789?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Ile">
+            <div class="gateway-card" onclick="window.location.href='bateaux.html'">
+                <img src="Images/Bateaux/bannière bateaux.png" class="gateway-img" alt="Bateaux">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
-                    <h3 class="gateway-title">Royaumes Isolés</h3>
-                    <p class="gateway-desc">Îles privées. Votre propre pays, vos propres règles.</p>
+                    <h3 class="gateway-title">Flottes Privées</h3>
+                    <p class="gateway-desc">Yachts et bateaux de luxe. Maîtrise des océans.</p>
                 </div>
             </div>
 
             <div class="gateway-card" onclick="window.location.href='villas.html'">
-                <img src="https://images.unsplash.com/photo-1605218427306-6354db696fc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="gateway-img" alt="Villa">
+                <img src="Images/Images catégories/Background architecture.png" class="gateway-img" alt="Villa">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
                     <h3 class="gateway-title">Architectures</h3>
@@ -295,11 +345,73 @@
 
     </div>
 
-    <footer style="background: var(--bg-card); padding: 80px 5%; border-top: 1px solid var(--border);">
-        <div style="max-width: 1400px; margin: 0 auto; text-align:center;">
-            <h4 style="font-family:'Cinzel',serif; font-size:2rem; margin-bottom:20px;">GWERTITUDE.</h4>
-            <p style="color:var(--text-sub);">L'impossible n'est qu'une option.</p>
-            <div style="margin-top:40px; color:var(--text-sub); font-size:0.8rem;">&copy; 2025 GWERTITUDE.</div>
+    <footer style="background: var(--bg-card); padding: 80px 5% 40px; border-top: 1px solid var(--border);">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                
+                <!-- À propos -->
+                <div>
+                    <h4 style="font-family:'Cinzel',serif; font-size:1.8rem; margin-bottom:20px; color: var(--text-main);">GWERTITUDE.</h4>
+                    <p style="color:var(--text-sub); line-height: 1.6; margin-bottom: 20px;">
+                        L'excellence n'est pas un choix, c'est une obligation. Nous redéfinissons le luxe pour ceux qui refusent les compromis.
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: var(--text-sub); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--text-sub); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--text-sub); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--text-sub); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h5 style="font-family:'Cinzel',serif; font-size:1.2rem; margin-bottom:20px; color: var(--text-main);">Navigation</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Accueil</a></li>
+                        <li style="margin-bottom: 10px;"><a href="aviation.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Cieux Privés</a></li>
+                        <li style="margin-bottom: 10px;"><a href="automobiles.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Mécanique d'Art</a></li>
+                        <li style="margin-bottom: 10px;"><a href="bateaux.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Flottes Privées</a></li>
+                        <li style="margin-bottom: 10px;"><a href="villas.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Architectures</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h5 style="font-family:'Cinzel',serif; font-size:1.2rem; margin-bottom:20px; color: var(--text-main);">Services</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px; color: var(--text-sub);">Conciergerie Personnelle</li>
+                        <li style="margin-bottom: 10px; color: var(--text-sub);">Acquisitions Discrètes</li>
+                        <li style="margin-bottom: 10px; color: var(--text-sub);">Transport Sécurisé</li>
+                        <li style="margin-bottom: 10px; color: var(--text-sub);">Conseil en Investissement</li>
+                        <li style="margin-bottom: 10px; color: var(--text-sub);">Événements Exclusifs</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h5 style="font-family:'Cinzel',serif; font-size:1.2rem; margin-bottom:20px; color: var(--text-main);">Newsletter</h5>
+                    <p style="color:var(--text-sub); margin-bottom: 20px; font-size: 0.9rem;">
+                        Restez informé des nouvelles acquisitions et événements exclusifs.
+                    </p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Votre email" style="flex: 1; padding: 10px; background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); border-radius: 6px; outline: none;">
+                        <button style="padding: 10px 15px; background: var(--accent); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">S'abonner</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div style="border-top: 1px solid var(--border); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div style="color: var(--text-sub); font-size: 0.8rem;">
+                    &copy; 2025 GWERTITUDE. Tous droits réservés.
+                </div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Politique de confidentialité</a>
+                    <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Conditions d'utilisation</a>
+                    <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Contact</a>
+                </div>
+            </div>
         </div>
     </footer>
 
