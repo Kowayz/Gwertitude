@@ -450,6 +450,12 @@
             total += price; count++;
             document.getElementById('cart-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(total);
             document.querySelector('.cart-count').innerText = count;
+            
+            // Sauvegarder dans localStorage
+            let cart = JSON.parse(localStorage.getItem('gwertitudeCart') || '[]');
+            cart.push({ title, price, img });
+            localStorage.setItem('gwertitudeCart', JSON.stringify(cart));
+            
             toggleCart();
         }
     </script>

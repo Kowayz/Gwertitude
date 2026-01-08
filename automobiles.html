@@ -218,6 +218,11 @@
             // Mise à jour Affichage
             document.getElementById('cart-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(cartTotal);
             document.querySelector('.cart-count').innerText = cartCount;
+            
+            // Sauvegarder dans localStorage
+            let cart = JSON.parse(localStorage.getItem('gwertitudeCart') || '[]');
+            cart.push({ title: name, price, img });
+            localStorage.setItem('gwertitudeCart', JSON.stringify(cart));
 
             // Ouverture automatique
             if(!document.body.classList.contains('cart-open')) toggleCart();

@@ -406,30 +406,26 @@
         <div class="order-summary">
             <h2>Récapitulatif</h2>
             
-            <div class="order-item">
-                <img src="Images/Automobile/Bugatti-La-Voiture-Noire.webp" alt="Bugatti" class="item-image">
-                <div class="item-details">
-                    <h4>Bugatti La Voiture Noire</h4>
-                    <p class="item-price">12 500 000 €</p>
-                </div>
+            <div id="order-items">
+                <!-- Items du panier chargés dynamiquement -->
             </div>
 
             <div class="price-breakdown">
                 <div class="price-line">
                     <span>Sous-total</span>
-                    <span>12 500 000 €</span>
+                    <span id="subtotal">0 €</span>
                 </div>
                 <div class="price-line">
                     <span>TVA (20%)</span>
-                    <span>2 500 000 €</span>
+                    <span id="tax">0 €</span>
                 </div>
                 <div class="price-line">
                     <span>Frais de service</span>
-                    <span>50 000 €</span>
+                    <span id="service-fee">0 €</span>
                 </div>
                 <div class="price-line total">
                     <span>Total</span>
-                    <span>15 050 000 €</span>
+                    <span id="grand-total">0 €</span>
                 </div>
             </div>
         </div>
@@ -450,6 +446,48 @@
     </div>
 
     <script>
+        // Charger le panier depuis localStorage
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('gwertitudeCart') || '[]');
+            const orderItemsContainer = document.getElementById('order-items');
+            
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p style="color: var(--text-sub); text-align: center;">Votre panier est vide</p>';
+                return;
+            }
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price;
+                const priceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(item.price);
+                
+                orderItemsContainer.innerHTML += `
+                    <div class="order-item">
+                        <img src="${item.img}" alt="${item.title}" class="item-image" onerror="this.src='https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=200'">
+                        <div class="item-details">
+                            <h4>${item.title}</h4>
+                            <p class="item-price">${priceFormatted}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Calculs
+            const tax = subtotal * 0.20;
+            const serviceFee = Math.max(50000, subtotal * 0.004); // Min 50k ou 0.4%
+            const total = subtotal + tax + serviceFee;
+            
+            // Affichage
+            document.getElementById('subtotal').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(subtotal);
+            document.getElementById('tax').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(tax);
+            document.getElementById('service-fee').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(serviceFee);
+            document.getElementById('grand-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(total);
+        }
+        
+        // Charger le panier au chargement de la page
+        loadCart();
+        
         // Payment method selection
         document.querySelectorAll('.payment-method').forEach(method => {
             method.addEventListener('click', function() {
@@ -469,6 +507,8 @@
             btn.disabled = true;
 
             setTimeout(() => {
+                // Vider le panier après paiement
+                localStorage.removeItem('gwertitudeCart');
                 document.getElementById('successModal').classList.add('show');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
