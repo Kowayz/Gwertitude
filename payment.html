@@ -451,12 +451,15 @@
             const cart = JSON.parse(localStorage.getItem('gwertitudeCart') || '[]');
             const orderItemsContainer = document.getElementById('order-items');
             
+            console.log('Panier chargé:', cart); // Debug
+            
             if (cart.length === 0) {
-                orderItemsContainer.innerHTML = '<p style="color: var(--text-sub); text-align: center;">Votre panier est vide</p>';
+                orderItemsContainer.innerHTML = '<p style="color: var(--text-sub); text-align: center; padding: 40px 0;">Votre panier est vide.<br><br><a href="index.html" style="color: var(--accent); text-decoration: underline;">Retour aux achats</a></p>';
                 return;
             }
             
             let subtotal = 0;
+            orderItemsContainer.innerHTML = ''; // Vider d'abord
             
             cart.forEach(item => {
                 subtotal += item.price;
@@ -486,7 +489,7 @@
         }
         
         // Charger le panier au chargement de la page
-        loadCart();
+        window.addEventListener('DOMContentLoaded', loadCart);
         
         // Payment method selection
         document.querySelectorAll('.payment-method').forEach(method => {
