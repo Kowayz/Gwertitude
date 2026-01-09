@@ -303,7 +303,7 @@
 
         <div class="gateway-grid">
             
-            <div class="gateway-card" onclick="window.location.href='aviation.html'">
+            <div class="gateway-card" onclick="window.location.href='aviation.php'">
                 <img src="Images/Images catégories/Background aviation.png" class="gateway-img" alt="Aviation">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
@@ -312,7 +312,7 @@
                 </div>
             </div>
 
-            <div class="gateway-card" onclick="window.location.href='automobiles.html'">
+            <div class="gateway-card" onclick="window.location.href='automobiles.php'">
                 <img src="Images/Images catégories/Background automobiles.png" class="gateway-img" alt="Auto">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
@@ -321,7 +321,7 @@
                 </div>
             </div>
 
-            <div class="gateway-card" onclick="window.location.href='bateaux.html'">
+            <div class="gateway-card" onclick="window.location.href='bateaux.php'">
                 <img src="Images/Bateaux/bannière bateaux.png" class="gateway-img" alt="Bateaux">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
@@ -330,7 +330,7 @@
                 </div>
             </div>
 
-            <div class="gateway-card" onclick="window.location.href='villas.html'">
+            <div class="gateway-card" onclick="window.location.href='villas.php'">
                 <img src="Images/Images catégories/Background architecture.png" class="gateway-img" alt="Villa">
                 <div class="gateway-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="gateway-content">
@@ -367,11 +367,11 @@
                 <div>
                     <h5 style="font-family:'Cinzel',serif; font-size:1.2rem; margin-bottom:20px; color: var(--text-main);">Navigation</h5>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Accueil</a></li>
-                        <li style="margin-bottom: 10px;"><a href="aviation.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Cieux Privés</a></li>
-                        <li style="margin-bottom: 10px;"><a href="automobiles.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Mécanique d'Art</a></li>
-                        <li style="margin-bottom: 10px;"><a href="bateaux.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Flottes Privées</a></li>
-                        <li style="margin-bottom: 10px;"><a href="villas.html" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Architectures</a></li>
+                        <li style="margin-bottom: 10px;"><a href="index.php" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Accueil</a></li>
+                        <li style="margin-bottom: 10px;"><a href="aviation.php" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Cieux Privés</a></li>
+                        <li style="margin-bottom: 10px;"><a href="automobiles.php" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Mécanique d'Art</a></li>
+                        <li style="margin-bottom: 10px;"><a href="bateaux.php" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Flottes Privées</a></li>
+                        <li style="margin-bottom: 10px;"><a href="villas.php" style="color: var(--text-sub); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-sub)'">Architectures</a></li>
                     </ul>
                 </div>
 
@@ -429,7 +429,7 @@
                 <span>Total Estimé</span>
                 <span id="cart-total">0 €</span>
             </div>
-            <button class="add-btn" style="background:var(--text-main); color:var(--bg-body);" onclick="window.location.href='payment.html'">Confirmer</button>
+            <button class="add-btn" style="background:var(--text-main); color:var(--bg-body);" onclick="window.location.href='payment.php'">Confirmer</button>
         </div>
     </div>
 

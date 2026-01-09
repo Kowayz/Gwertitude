@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWERTITUDE | Palais & Villas</title>
+    <title>GWERTITUDE | Automobiles</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,9 +92,6 @@
         .cart-items { flex: 1; overflow-y: auto; }
         .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
         .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); }
-        .item-info h4 { font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
-        .item-info span { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
-
         .cart-footer { padding-top: 20px; border-top: 1px solid var(--border); }
         .total-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; }
         .checkout-btn { width: 100%; padding: 15px; background: var(--text-main); color: var(--bg-body); border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
@@ -106,7 +103,7 @@
 <body>
 
     <nav>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+        <a href="index.php" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
         <div class="logo">Gwertitude.</div>
         <div class="nav-icons">
             <button class="icon-btn" onclick="toggleCart()">
@@ -141,7 +138,7 @@
                 <span>Total Estimé</span>
                 <span id="cart-total">0 €</span>
             </div>
-            <button class="checkout-btn" onclick="window.location.href='payment.html'">CONFIRMER</button>
+            <button class="checkout-btn" onclick="window.location.href='payment.php'">CONFIRMER</button>
         </div>
     </div>
 
@@ -149,19 +146,17 @@
         // --- LOGIQUE SYSTEME ---
         function toggleCart(){document.body.classList.toggle('cart-open')}
 
-        // --- DONNÉES VILLAS ---
+        // --- DONNÉES AUTOMOBILES ---
         const DATA = {
-            title: "Palais Modernes",
-            subtitle: "Chefs-d'œuvre architecturaux. Codes postaux convoités.",
-            hero: "Images/Villas/bannière G.png",
-            stats: [{v:"2000+",l:"M²"}, {v:"AAA",l:"Location"}, {v:"24/7",l:"Sécurité"}],
+            title: "Mécanique d'Art",
+            subtitle: "Ingénierie de l'extrême. Vivre au-delà de 400 km/h.",
+            hero: "Images/Automobile/Bannière Automobile.png",
+            stats: [{v:"1600",l:"Chevaux"}, {v:"2.4s",l:"0-100"}, {v:"440",l:"Km/h"}],
             items: [
-                { name: "Villa Les Cèdres", price: 410000000, img: "Images/Villas/Villa Les Cèdres.jpg", desc: "Saint-Jean-Cap-Ferrat. Histoire royale.", s1:"18k ft²", s2:"France" },
-                { name: "The One", price: 141000000, img: "Images/Villas/The One.webp", desc: "Bel-Air. Vue 360° sur LA.", s1:"105k ft²", s2:"USA" },
-                { name: "Penthouse Odéon", price: 335000000, img: "Images/Villas/Penthouse Odéon.webp", desc: "Monaco. Toboggan privé sur le toit.", s1:"3500 m²", s2:"Monaco" },
-                { name: "Marble Palace", price: 204000000, img: "Images/Villas/Marble Palace.jpg", desc: "Dubai. Inspiré de Versailles.", s1:"6000 m²", s2:"Dubai" }
-
-
+                { name: "Bugatti Chiron SS", price: 3900000, img: "https://images.unsplash.com/photo-1621689725656-e918b9595568", desc: "Fusée de luxe W16 quad-turbo.", s1:"1600 HP", s2:"440 km/h" },
+                { name: "Pagani Huayra BC", price: 4500000, img: "https://images.unsplash.com/photo-1544602356-ac9a6d074a28", desc: "Carbo-Titanium. Sculptée par le vent.", s1:"800 HP", s2:"1250 kg" },
+                { name: "Koenigsegg Jesko", price: 3000000, img: "https://images.unsplash.com/photo-1614200187528-2011556542e8", desc: "Transmission LST révolutionnaire.", s1:"1600 HP", s2:"500+ km/h" },
+                { name: "Ferrari Daytona SP3", price: 2250000, img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae", desc: "V12 Icona Series atmosphérique.", s1:"840 HP", s2:"V12 Atm" }
             ]
         };
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWERTITUDE | Flottes Privées</title>
+    <title>GWERTITUDE | Aviation</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CORE STYLES (IDENTIQUE INDEX) --- */
+        /* --- STYLE IDENTIQUE A L'INDEX --- */
         :root {
             --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
             --pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='luxuryPattern' patternUnits='userSpaceOnUse' width='30' height='30'%3E%3Ccircle cx='15' cy='15' r='0.8' fill='rgba(212,175,55,0.06)' /%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23luxuryPattern)' /%3E%3C/svg%3E");
@@ -36,6 +36,7 @@
         .back-btn { font-size: 0.9rem; text-transform: uppercase; color: var(--text-sub); display: flex; align-items: center; gap: 10px; }
         .back-btn:hover { color: var(--accent); gap: 15px; }
 
+        /* ICONES NAV */
         .nav-icons { display: flex; gap: 15px; }
         .icon-btn { position: relative; width: 45px; height: 45px; background: var(--bg-card); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 1px solid var(--border); color: var(--text-main); }
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -43,8 +44,7 @@
 
         /* HERO */
         header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.4); opacity: 0; transition: 1s ease; }
-        .hero-bg.loaded { opacity: 1; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.4); }
         h1 { font-family: 'Bodoni Moda', serif; font-size: 3.8rem; font-weight: 700; margin-bottom: 10px; }
         .subtitle { color: var(--text-sub); font-size: 1rem; max-width: 600px; }
         
@@ -53,7 +53,7 @@
         .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--accent); display: block; font-family: 'Cinzel', serif; }
         .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-sub); }
 
-        /* GRILLE */
+        /* GRILLE PRODUITS */
         .container { max-width: 1400px; margin: 0 auto; padding: 80px 5%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
         
@@ -64,7 +64,7 @@
         .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
         .card:hover .img-wrap img { transform: scale(1.05); }
 
-        .specs-row { display: flex; border-bottom: 1px solid var(--border); }
+        .specs { display: flex; border-bottom: 1px solid var(--border); }
         .spec { flex: 1; text-align: center; padding: 10px; border-right: 1px solid var(--border); font-size: 0.8rem; color: var(--text-sub); }
         .spec:last-child { border-right: none; }
         .spec b { display: block; color: var(--text-main); font-size: 0.9rem; }
@@ -77,8 +77,8 @@
         .add-btn { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
         .add-btn:hover { background: var(--text-main); color: #000; }
 
-        /* PANIER DRAWER */
-        .cart-drawer { position: fixed; top: 0; right: -450px; width: 450px; height: 100%; background: var(--bg-card); z-index: 2000; padding: 30px; display: flex; flex-direction: column; transition: 0.4s ease; border-left: 1px solid var(--border); box-shadow: -10px 0 50px rgba(0,0,0,0.8); }
+        /* --- PANIER (COPIE EXACTE DE TES SCREENS) --- */
+        .cart-drawer { position: fixed; top: 0; right: -450px; width: 450px; height: 100%; background: #080808; z-index: 2000; padding: 30px; display: flex; flex-direction: column; transition: 0.4s ease; border-left: 1px solid var(--border); box-shadow: -10px 0 50px rgba(0,0,0,0.8); }
         .cart-open .cart-drawer { right: 0; }
         
         .backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.4s; }
@@ -92,10 +92,13 @@
         .cart-items { flex: 1; overflow-y: auto; }
         .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
         .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); }
+        .item-info h4 { font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
+        .item-info span { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+
         .cart-footer { padding-top: 20px; border-top: 1px solid var(--border); }
         .total-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; }
-        .checkout-btn { width: 100%; padding: 15px; background: var(--text-main); color: var(--bg-body); border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .checkout-btn:hover { background: var(--accent); color: #fff; }
+        .checkout-btn { width: 100%; padding: 15px; background: #fff; color: #000; border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .checkout-btn:hover { background: var(--accent); }
 
         @media (max-width: 768px) { h1 { font-size: 2.5rem; } .grid { grid-template-columns: 1fr; } .cart-drawer { width: 100%; } }
     </style>
@@ -103,7 +106,7 @@
 <body>
 
     <nav>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+        <a href="index.php" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
         <div class="logo">Gwertitude.</div>
         <div class="nav-icons">
             <button class="icon-btn" onclick="toggleCart()">
@@ -130,92 +133,106 @@
             <span class="cart-title">DOSSIER</span>
             <i class="fas fa-times close-cart" onclick="toggleCart()"></i>
         </div>
+
         <div class="cart-items" id="cart-content">
-            <p style="text-align:center; color:var(--text-sub); margin-top:50px;">Dossier vide.</p>
+            <p style="text-align:center; color:var(--text-sub); margin-top:50px;">Aucun actif sélectionné.</p>
         </div>
+
         <div class="cart-footer">
             <div class="total-row">
                 <span>Total Estimé</span>
                 <span id="cart-total">0 €</span>
             </div>
-            <button class="checkout-btn" onclick="window.location.href='payment.html'">CONFIRMER</button>
+            <button class="checkout-btn" onclick="window.location.href='payment.php'">CONFIRMER</button>
         </div>
     </div>
 
     <script>
-        // --- LOGIQUE SYSTEME ---
-        function toggleCart(){document.body.classList.toggle('cart-open')}
-
-        // --- DONNÉES BATEAUX ---
-        const DATA = {
-            title: "Flottes Privées",
-            subtitle: "Maîtrise des mers. Luxe nautique ultime et souveraineté aquatique.",
-            hero: "Images/Bateaux/bannière bateaux.png",
-            stats: [{v:"100m+",l:"Longueur"}, {v:"50+",l:"Nœuds"}, {v:"∞",l:"Horizons"}],
-            items: [
-                { name: "Azzam Yacht", price: 600000000, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Le plus long yacht du monde. 180m de pure élégance.", s1:"180m", s2:"27 Nœuds" },
-                { name: "Eclipse", price: 500000000, img: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Sous-marin intégré. Luxe submersible.", s1:"162m", s2:"Sous-marin" },
-                { name: "Dubai", price: 400000000, img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Hélicoptère sur le toit. Palais flottant.", s1:"162m", s2:"Hélico" },
-                { name: "Topaz", price: 300000000, img: "https://images.unsplash.com/photo-1520637836862-4d197d17c1a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Stabilisation zéro. Confort absolu.", s1:"147m", s2:"Stabilisé" }
+        // --- 1. CONFIGURATION AVIATION ---
+        const PAGE_CONFIG = {
+            title: "Cieux Privés",
+            subtitle: "La domination aérienne redéfinie. Portée mondiale, confort absolu.",
+            heroImage: "Images/Aviation/Bannière Aviation.png",
+            stats: [
+                { value: "0.925", label: "Mach Max" },
+                { value: "8,000", label: "Range (nm)" },
+                { value: "51,000", label: "Altitude (ft)" }
+            ],
+            products: [
+                { name: "Gulfstream G800", price: 75000000, img: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Le jet d'affaires le plus rapide et le plus lointain.", s1:"19 Pax", s2:"8000nm" },
+                { name: "Bombardier Global 7500", price: 73000000, img: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Quatre espaces de vie distincts. Suite principale.", s1:"4 Zones", s2:"7700nm" },
+                { name: "Dassault Falcon 10X", price: 75000000, img: "https://images.unsplash.com/photo-1559087867-ce4c91325525?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "La cabine la plus large de l'industrie.", s1:"0.925 M", s2:"XL Cabin" },
+                { name: "Embraer Praetor 600", price: 21000000, img: "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Technologie Full Fly-by-Wire.", s1:"4018nm", s2:"12 Pax" }
             ]
         };
 
-        // --- MOTEUR RENDU ---
-        document.getElementById('page-title').innerHTML = DATA.title;
-        document.getElementById('page-subtitle').innerText = DATA.subtitle;
-        const bg = document.getElementById('hero-bg'); bg.src = DATA.hero; bg.onload = () => bg.classList.add('loaded');
+        // --- 2. MOTEUR D'AFFICHAGE ---
+        document.getElementById('page-title').innerHTML = PAGE_CONFIG.title;
+        document.getElementById('page-subtitle').innerText = PAGE_CONFIG.subtitle;
+        document.getElementById('hero-bg').src = PAGE_CONFIG.heroImage;
 
+        // Stats
         const statsBox = document.getElementById('hero-stats');
-        DATA.stats.forEach(s => statsBox.innerHTML += `<div class="stat-item"><span class="stat-val">${s.v}</span><span class="stat-label">${s.l}</span></div>`);
+        PAGE_CONFIG.stats.forEach(s => {
+            statsBox.innerHTML += `<div class="stat-item"><span class="stat-val">${s.value}</span><span class="stat-label">${s.label}</span></div>`;
+        });
 
+        // Produits
         const grid = document.getElementById('product-grid');
-        DATA.items.forEach(p => {
+        PAGE_CONFIG.products.forEach(p => {
+            // Formatage du prix pour l'affichage (ex: 75 000 000 €)
             let displayPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(p.price);
+            
             grid.innerHTML += `
                 <div class="card">
                     <div class="img-wrap"><img src="${p.img}"></div>
-                    <div class="specs-row">
-                        <div class="spec"><b>${p.s1.split(' ')[0]}</b>${p.s1.split(' ')[1] || ''}</div>
-                        <div class="spec"><b>${p.s2.split(' ')[0]}</b>${p.s2.split(' ')[1] || ''}</div>
+                    <div class="specs">
+                        <div class="spec"><b>${p.s1}</b></div>
+                        <div class="spec"><b>${p.s2}</b></div>
                     </div>
                     <div class="card-body">
                         <h3 class="c-title">${p.name}</h3>
                         <span class="c-price">${displayPrice}</span>
                         <p class="c-desc">${p.desc}</p>
-                        <button class="add-btn" onclick="addToCart('${p.name}', ${p.price}, '${p.img}')">Acquérir</button>
+                        <button class="add-btn" onclick="addToCart('${p.name}', ${p.price}, '${p.img}')">ACQUÉRIR</button>
                     </div>
                 </div>
             `;
         });
 
-        // --- GESTION PANIER INFAILLIBLE ---
-        let cartTotal = 0; 
+        // --- 3. LOGIQUE PANIER (TESTÉE ET VALIDE) ---
+        let cartTotal = 0;
         let cartCount = 0;
+
+        function toggleCart() {
+            document.body.classList.toggle('cart-open');
+        }
 
         function addToCart(name, price, img) {
             const content = document.getElementById('cart-content');
             
-            // Premier ajout : on vide le message "vide"
-            if(cartCount === 0) content.innerHTML = '';
+            // Si c'est le premier item, on efface le message "Vide"
+            if (cartCount === 0) content.innerHTML = '';
 
+            // On formate le prix juste pour l'affichage dans le panier
             const priceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(price);
 
-            // Ajout HTML
+            // On ajoute l'item
             content.innerHTML += `
                 <div class="cart-item">
                     <img src="${img}">
                     <div class="item-info">
-                        <h4 style="font-size:0.9rem; margin-bottom:5px; font-weight:600;">${name}</h4>
-                        <span style="color:var(--accent); font-weight:700; font-size:0.9rem;">${priceFormatted}</span>
+                        <h4>${name}</h4>
+                        <span>${priceFormatted}</span>
                     </div>
                 </div>
             `;
 
-            // Calculs (Simple addition d'entiers)
+            // Calculs mathématiques simples
             cartTotal += price;
             cartCount++;
 
-            // Mise à jour Affichage
+            // Mise à jour de l'affichage total
             document.getElementById('cart-total').innerText = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(cartTotal);
             document.querySelector('.cart-count').innerText = cartCount;
             
@@ -224,8 +241,10 @@
             cart.push({ title: name, price, img });
             localStorage.setItem('gwertitudeCart', JSON.stringify(cart));
 
-            // Ouverture automatique
-            if(!document.body.classList.contains('cart-open')) toggleCart();
+            // On ouvre le panier
+            if (!document.body.classList.contains('cart-open')) {
+                toggleCart();
+            }
         }
     </script>
 </body>

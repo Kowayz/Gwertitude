@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWERTITUDE | Automobiles</title>
+    <title>GWERTITUDE | Flottes Privées</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,7 +103,7 @@
 <body>
 
     <nav>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+        <a href="index.php" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
         <div class="logo">Gwertitude.</div>
         <div class="nav-icons">
             <button class="icon-btn" onclick="toggleCart()">
@@ -138,7 +138,7 @@
                 <span>Total Estimé</span>
                 <span id="cart-total">0 €</span>
             </div>
-            <button class="checkout-btn" onclick="window.location.href='payment.html'">CONFIRMER</button>
+            <button class="checkout-btn" onclick="window.location.href='payment.php'">CONFIRMER</button>
         </div>
     </div>
 
@@ -146,17 +146,17 @@
         // --- LOGIQUE SYSTEME ---
         function toggleCart(){document.body.classList.toggle('cart-open')}
 
-        // --- DONNÉES AUTOMOBILES ---
+        // --- DONNÉES BATEAUX ---
         const DATA = {
-            title: "Mécanique d'Art",
-            subtitle: "Ingénierie de l'extrême. Vivre au-delà de 400 km/h.",
-            hero: "Images/Automobile/Bannière Automobile.png",
-            stats: [{v:"1600",l:"Chevaux"}, {v:"2.4s",l:"0-100"}, {v:"440",l:"Km/h"}],
+            title: "Flottes Privées",
+            subtitle: "Maîtrise des mers. Luxe nautique ultime et souveraineté aquatique.",
+            hero: "Images/Bateaux/bannière bateaux.png",
+            stats: [{v:"100m+",l:"Longueur"}, {v:"50+",l:"Nœuds"}, {v:"∞",l:"Horizons"}],
             items: [
-                { name: "Bugatti Chiron SS", price: 3900000, img: "https://images.unsplash.com/photo-1621689725656-e918b9595568", desc: "Fusée de luxe W16 quad-turbo.", s1:"1600 HP", s2:"440 km/h" },
-                { name: "Pagani Huayra BC", price: 4500000, img: "https://images.unsplash.com/photo-1544602356-ac9a6d074a28", desc: "Carbo-Titanium. Sculptée par le vent.", s1:"800 HP", s2:"1250 kg" },
-                { name: "Koenigsegg Jesko", price: 3000000, img: "https://images.unsplash.com/photo-1614200187528-2011556542e8", desc: "Transmission LST révolutionnaire.", s1:"1600 HP", s2:"500+ km/h" },
-                { name: "Ferrari Daytona SP3", price: 2250000, img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae", desc: "V12 Icona Series atmosphérique.", s1:"840 HP", s2:"V12 Atm" }
+                { name: "Azzam Yacht", price: 600000000, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Le plus long yacht du monde. 180m de pure élégance.", s1:"180m", s2:"27 Nœuds" },
+                { name: "Eclipse", price: 500000000, img: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Sous-marin intégré. Luxe submersible.", s1:"162m", s2:"Sous-marin" },
+                { name: "Dubai", price: 400000000, img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Hélicoptère sur le toit. Palais flottant.", s1:"162m", s2:"Hélico" },
+                { name: "Topaz", price: 300000000, img: "https://images.unsplash.com/photo-1520637836862-4d197d17c1a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", desc: "Stabilisation zéro. Confort absolu.", s1:"147m", s2:"Stabilisé" }
             ]
         };
 

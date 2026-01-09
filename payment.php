@@ -318,8 +318,8 @@
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo">GWERTITUDE</a>
-        <a href="index.html" class="back-btn">
+        <a href="index.php" class="logo">GWERTITUDE</a>
+        <a href="index.php" class="back-btn">
             <i class="fas fa-arrow-left"></i> Retour
         </a>
     </nav>
@@ -439,7 +439,7 @@
             </div>
             <h2>Paiement Confirmé !</h2>
             <p>Votre commande a été traitée avec succès.<br>Un email de confirmation vous a été envoyé.</p>
-            <button class="modal-btn" onclick="window.location.href='index.html'">
+            <button class="modal-btn" onclick="window.location.href='index.php'">
                 Retour à l'accueil
             </button>
         </div>
@@ -454,7 +454,7 @@
             console.log('Panier chargé:', cart); // Debug
             
             if (cart.length === 0) {
-                orderItemsContainer.innerHTML = '<p style="color: var(--text-sub); text-align: center; padding: 40px 0;">Votre panier est vide.<br><br><a href="index.html" style="color: var(--accent); text-decoration: underline;">Retour aux achats</a></p>';
+                orderItemsContainer.innerHTML = '<p style="color: var(--text-sub); text-align: center; padding: 40px 0;">Votre panier est vide.<br><br><a href="index.php" style="color: var(--accent); text-decoration: underline;">Retour aux achats</a></p>';
                 return;
             }
             
